@@ -80,7 +80,8 @@ bash download_dataset.sh
 ```
 
 Then come back to the root directory, you can evaluate any `transformers`-based pre-trained models using our evaluation code. For example,
-```bash ./scripts/eval.sh
+```
+bash ./scripts/eval.sh
 ```
 which is expected to output the results in a tabular format:
 ```
