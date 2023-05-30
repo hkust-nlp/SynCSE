@@ -134,7 +134,7 @@ We provide example training scripts for both training SynCSE in `sup_train_mp.sh
 
 All the other arguments are standard Huggingface's `transformers` training arguments. Some of the often-used arguments are: `--output_dir`, `--learning_rate`, `--per_device_train_batch_size`.
 
-For results in the paper, we use Nvidia 3090 GPUs with CUDA 11. Using different types of devices or different versions of CUDA/other softwares may lead to slightly different performance.
+For results in the paper, we use Nvidia A100 (80)G GPUs with CUDA 11.6 Using different types of devices or different versions of CUDA/other softwares may lead to slightly different performance.
 
 **Hyperparameters**
 
