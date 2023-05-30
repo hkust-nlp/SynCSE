@@ -155,7 +155,7 @@ Our saved checkpoints are slightly different from Huggingface's pre-trained chec
 
 ## Bugs or questions?
 
-If you have any questions related to the code or the paper, feel free to email Tianyu (`tianyug@cs.princeton.edu`) and Xingcheng (`yxc18@mails.tsinghua.edu.cn`). If you encounter any problems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
+If you have any questions related to the code or the paper, feel free to email Junlei (`zhangjunlei@westlake.edu.cn`). If you encounter any problems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
 
 ## Citation
 
