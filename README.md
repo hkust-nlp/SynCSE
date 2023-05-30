@@ -6,7 +6,7 @@ This repository contains the code, datasets and pre-trained models for our paper
 
 Thanks for your interest in our repo!
 
-* 5/30: We released our [SynCSE-partial model checkpoints](#use-our-models-out-of-the-box) and [training code](#evaluation).
+* 5/30: We released our [SynCSE-partial model checkpoints](https://westlakeu-my.sharepoint.com/:f:/g/personal/zhangjunlei_westlake_edu_cn/ErhOPnqWPUlHgeL4aKgK4twB97jV-DaKD4DMWKIhfhqE0g?e=yLN6OU), [dataset used in SynCSE-partial setting](https://westlakeu-my.sharepoint.com/:u:/g/personal/zhangjunlei_westlake_edu_cn/EftQB5qTiBxPoP-EedqsAqkBl4wjKntZEPGovJGGIapq4A?e=vKz3EL), and [training code](#evaluation).
 * 5/23: We released [our paper](https://arxiv.org/abs/2305.15077). Check it out!
 
 ### TO DO list
