@@ -13,6 +13,7 @@ Thanks for your interest in our repo!
 
 - [x] Upload the synthetic SynCSE-partial dataset. 
 - [x] Upload the checkpoint of SynCSE-partial and training code.
+- [ ] Upload the code for dataset generation.
 - [ ] Upload the synthetic SynCSE-scratch dataset and checkpoint. 
 - [ ] Upload our model and synthetic dataset to Huggingface.
 - [ ] Setup a python package for our project.
