@@ -84,6 +84,7 @@ Then come back to the root directory, you can evaluate any `transformers`-based 
 bash ./scripts/eval.sh
 ```
 which is expected to output the results in a tabular format:
+```
 ------ test ------
 +-------+-------+-------+-------+-------+--------------+-----------------+-------+
 | STS12 | STS13 | STS14 | STS15 | STS16 | STSBenchmark | SICKRelatedness |  Avg. |
