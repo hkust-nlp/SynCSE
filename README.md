@@ -4,5 +4,173 @@ This repository contains the code, datasets and pre-trained models for our paper
 
 Thanks for your interest in our repo!
 
-Wait a minute! The authors are working day and night 💪, to make the code and models available, so you can explore our state-of-the-art sentence embeddings.
-We anticipate the code will be out * **in one week** *. 
+* 4/20: We released our [SynCSE-partial model checkpoints](#use-our-models-out-of-the-box) and [training code](#evaluation).
+* 5/23: We released [our paper](https://arxiv.org/abs/2305.15077). Check it out!
+
+### TO DO list
+
+- [x] Upload the synthetic SynCSE-partial dataset. 
+- [x] Upload the checkpoint of SynCSE-partial and training code.
+- [ ] Upload the synthetic SynCSE-scratch dataset and checkpoint. 
+- [ ] Upload our model and synthetic dataset to Huggingface.
+- [ ] Setup a python package for our project.
+
+## Quick Links
+
+  - [Overview](#overview)
+  - [Getting Started](#getting-started)
+  - [Model List](#model-list)
+  - [Use SimCSE with Huggingface](#use-simcse-with-huggingface)
+  - [Train SimCSE](#train-simcse)
+    - [Requirements](#requirements)
+    - [Evaluation](#evaluation)
+    - [Training](#training)
+  - [Bugs or Questions?](#bugs-or-questions)
+  - [Citation](#citation)
+  - [SimCSE Elsewhere](#simcse-elsewhere)
+
+## Overview
+
+Contrastive learning has been the dominant approach to train state-of-the-art sentence embeddings. Previous studies have typically learned sentence embeddings either through the use of human-annotated natural language inference (NLI) data or via large-scale unlabeled sentences in an unsupervised manner. However, even in the case of unlabeled data, their acquisition presents challenges in certain domains due to various reasons. To address these issues, we present SynCSE, a contrastive learning framework that trains sentence embeddings with synthesized data. Specifically, we explore utilizing large language models to synthesize the required data samples for contrastive learning, including (1) producing positive and negative annotations given unlabeled sentences (SynCSE-partial), and (2) generating sentences along with their corresponding annotations from scratch (SynCSE-scratch). Experimental results on sentence similarity and reranking tasks indicate that both SynCSE-partial and SynCSE-scratch greatly outperform unsupervised baselines, and SynCSE-partial even achieves comparable performance to the supervised models in most settings.
+
+## Getting Started
+
+
+
+## Model List
+
+Our released models are listed as following.  
+|              Model              | Avg. STS |
+|:-------------------------------|:--------:|
+|  [SynCSE-partial](https://huggingface.co/princeton-nlp/unsup-simcse-roBERTa-base-uncased) |   81.94 |
+
+
+Note that the results are slightly different from what we reported in our paper. Because we clean the our generated SimCSE\_NLI dataset and filter out failure generations (e.g. "I am sorry, I can not generate a sentence...").
+
+**Naming rules**: `unsup` and `sup` represent "unsupervised" (trained on Wikipedia corpus) and "supervised" (trained on NLI datasets) respectively.
+
+## Train SynCSE
+
+In the following section, we describe how to train a SimCSE model by using our code.
+
+### Requirements
+
+First, install PyTorch by following the instructions from [the official website](https://pytorch.org). To faithfully reproduce our results, please use the correct ` 1.13.0+cu116` version corresponding to your platforms/CUDA versions. We train our model on a single A100-80G card.
+
+```bash
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
+```
+
+
+Then run the following script to install the remaining dependencies,
+
+```bash
+pip install -r requirements.txt
+```
+
+### Evaluation
+Our evaluation code for sentence embeddings is based on a modified version of [SentEval](https://github.com/facebookresearch/SentEval). It evaluates sentence embeddings on semantic textual similarity (STS) tasks and downstream transfer tasks. For STS tasks, our evaluation takes the "all" setting, and report Spearman's correlation.
+
+Before evaluation, please download the evaluation datasets by running
+```bash
+cd SentEval/data/downstream/
+bash download_dataset.sh
+```
+
+Then come back to the root directory, you can evaluate any `transformers`-based pre-trained models using our evaluation code. For example,
+```bash ./script/
+```
+which is expected to output the results in a tabular format:
+```
+------ test ------
++-------+-------+-------+-------+-------+--------------+-----------------+-------+
+| STS12 | STS13 | STS14 | STS15 | STS16 | STSBenchmark | SICKRelatedness |  Avg. |
++-------+-------+-------+-------+-------+--------------+-----------------+-------+
+| 75.30 | 84.67 | 80.19 | 85.40 | 80.82 |    84.26     |      80.39      | 81.58 |
++-------+-------+-------+-------+-------+--------------+-----------------+-------+
+```
+
+Arguments for the evaluation script are as follows,
+
+* `--model_name_or_path`: The name or path of a `transformers`-based pre-trained checkpoint. You can directly use the models in the above table, e.g., `princeton-nlp/sup-simcse-bert-base-uncased`.
+* `--pooler`: Pooling method. Now we support
+    * `cls` (default): Use the representation of `[CLS]` token. A linear+activation layer is applied after the representation (it's in the standard BERT implementation). If you use **supervised SimCSE**, you should use this option.
+    * `cls_before_pooler`: Use the representation of `[CLS]` token without the extra linear+activation. If you use **unsupervised SimCSE**, you should take this option.
+    * `avg`: Average embeddings of the last layer. If you use checkpoints of SBERT/SRoBERTa ([paper](https://arxiv.org/abs/1908.10084)), you should use this option.
+    * `avg_top2`: Average embeddings of the last two layers.
+    * `avg_first_last`: Average embeddings of the first and last layers. If you use vanilla BERT or RoBERTa, this works the best.
+* `--mode`: Evaluation mode
+    * `test` (default): The default test mode. To faithfully reproduce our results, you should use this option.
+    * `dev`: Report the development set results. Note that in STS tasks, only `STS-B` and `SICK-R` have development sets, so we only report their numbers. It also takes a fast mode for transfer tasks, so the running time is much shorter than the `test` mode (though numbers are slightly lower).
+    * `fasttest`: It is the same as `test`, but with a fast mode so the running time is much shorter, but the reported numbers may be lower (only for transfer tasks).
+* `--task_set`: What set of tasks to evaluate on (if set, it will override `--tasks`)
+    * `sts` (default): Evaluate on STS tasks, including `STS 12~16`, `STS-B` and `SICK-R`. This is the most commonly-used set of tasks to evaluate the quality of sentence embeddings.
+    * `transfer`: Evaluate on transfer tasks.
+    * `full`: Evaluate on both STS and transfer tasks.
+    * `na`: Manually set tasks by `--tasks`.
+* `--tasks`: Specify which dataset(s) to evaluate on. Will be overridden if `--task_set` is not `na`. See the code for a full list of tasks.
+
+### Training
+
+**Data**
+
+For unsupervised SimCSE, we sample 1 million sentences from English Wikipedia; for supervised SimCSE, we use the SNLI and MNLI datasets. You can run `data/download_wiki.sh` and `data/download_nli.sh` to download the two datasets.
+
+**Training scripts**
+
+We provide example training scripts for both unsupervised and supervised SimCSE. In `run_unsup_example.sh`, we provide a single-GPU (or CPU) example for the unsupervised version, and in `run_sup_example.sh` we give a **multiple-GPU** example for the supervised version. Both scripts call `train.py` for training. We explain the arguments in following:
+* `--train_file`: Training file path. We support "txt" files (one line for one sentence) and "csv" files (2-column: pair data with no hard negative; 3-column: pair data with one corresponding hard negative instance). You can use our provided Wikipedia or NLI data, or you can use your own data with the same format.
+* `--model_name_or_path`: Pre-trained checkpoints to start with. For now we support BERT-based models (`bert-base-uncased`, `bert-large-uncased`, etc.) and RoBERTa-based models (`RoBERTa-base`, `RoBERTa-large`, etc.).
+* `--temp`: Temperature for the contrastive loss.
+* `--pooler_type`: Pooling method. It's the same as the `--pooler_type` in the [evaluation part](#evaluation).
+* `--mlp_only_train`: We have found that for unsupervised SimCSE, it works better to train the model with MLP layer but test the model without it. You should use this argument when training unsupervised SimCSE models.
+* `--hard_negative_weight`: If using hard negatives (i.e., there are 3 columns in the training file), this is the logarithm of the weight. For example, if the weight is 1, then this argument should be set as 0 (default value).
+* `--do_mlm`: Whether to use the MLM auxiliary objective. If True:
+  * `--mlm_weight`: Weight for the MLM objective.
+  * `--mlm_probability`: Masking rate for the MLM objective.
+
+All the other arguments are standard Huggingface's `transformers` training arguments. Some of the often-used arguments are: `--output_dir`, `--learning_rate`, `--per_device_train_batch_size`. In our example scripts, we also set to evaluate the model on the STS-B development set (need to download the dataset following the [evaluation](#evaluation) section) and save the best checkpoint.
+
+For results in the paper, we use Nvidia 3090 GPUs with CUDA 11. Using different types of devices or different versions of CUDA/other softwares may lead to slightly different performance.
+
+**Hyperparameters**
+
+We use the following hyperparamters for training SimCSE:
+
+|               | Unsup. BERT | Unsup. RoBERTa | Sup.      |
+|:--------------|:-----------:|:--------------:|:---------:|
+| Batch size    | 64          | 512            | 512       |
+| Learning rate (base)  | 3e-5 | 1e-5 | 5e-5 |
+| Learning rate (large) | 1e-5 | 3e-5 | 1e-5 |
+
+
+**Convert models**
+
+Our saved checkpoints are slightly different from Huggingface's pre-trained checkpoints. Run `python simcse_to_huggingface.py --path {PATH_TO_CHECKPOINT_FOLDER}` to convert it. After that, you can evaluate it by our [evaluation](#evaluation) code or directly use it [out of the box](#use-our-models-out-of-the-box).
+
+
+
+## Bugs or questions?
+
+If you have any questions related to the code or the paper, feel free to email Tianyu (`tianyug@cs.princeton.edu`) and Xingcheng (`yxc18@mails.tsinghua.edu.cn`). If you encounter any problems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
+
+## Citation
+
+Please cite our paper if you use SimCSE in your work:
+
+```bibtex
+@inproceedings{gao2021simcse,
+   title={{SimCSE}: Simple Contrastive Learning of Sentence Embeddings},
+   author={Gao, Tianyu and Yao, Xingcheng and Chen, Danqi},
+   booktitle={Empirical Methods in Natural Language Processing (EMNLP)},
+   year={2021}
+}
+```
+
+## SimCSE Elsewhere
+
+We thank the community's efforts for extending SimCSE!
+
+- [Jianlin Su](https://github.com/bojone) has provided [a Chinese version of SimCSE](https://github.com/bojone/SimCSE).
+- [AK391](https://github.com/AK391) integrated to [Huggingface Spaces](https://huggingface.co/spaces) with [Gradio](https://github.com/gradio-app/gradio). See demo: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/akhaliq/SimCSE)
+- [Nils Reimers](https://github.com/nreimers) has implemented a `sentence-transformers`-based [training code](https://colab.research.google.com/drive/1gAjXcI4uSxDE_IcvZdswFYVAo7XvPeoU?usp=sharing#scrollTo=UXUsikOc6oiB) for SimCSE
