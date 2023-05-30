@@ -140,11 +140,11 @@ For results in the paper, we use Nvidia A100 (80G) GPUs with CUDA 11.6 Using dif
 
 We use the following hyperparamters for training SimCSE:
 
-|               | Unsup. BERT | Unsup. RoBERTa | Sup.      |
-|:--------------|:-----------:|:--------------:|:---------:|
-| Batch size    | 64          | 512            | 512       |
-| Learning rate (base)  | 3e-5 | 1e-5 | 5e-5 |
-| Learning rate (large) | 1e-5 | 3e-5 | 1e-5 |
+|               | Unsup. RoBERTa |
+|:--------------|:---------:|
+| Batch size    |  512       |
+| Learning rate (base)   | 5e-5 |
+| Learning rate (large) | 1e-5 |
 
 
 **Convert models**
