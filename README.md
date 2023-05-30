@@ -44,7 +44,7 @@ Contrastive learning has been the dominant approach to train state-of-the-art se
 Our released models are listed as following.  
 |              Model              | Avg. STS |
 |:-------------------------------|:--------:|
-|  [SynCSE-partial](https://westlakeu-my.sharepoint.com/:f:/g/personal/zhangjunlei_westlake_edu_cn/ErhOPnqWPUlHgeL4aKgK4twB97jV-DaKD4DMWKIhfhqE0g?e=yLN6OU) |   81.78 |
+|  [SynCSE-partial-RoBERTa-base](https://westlakeu-my.sharepoint.com/:f:/g/personal/zhangjunlei_westlake_edu_cn/ErhOPnqWPUlHgeL4aKgK4twB97jV-DaKD4DMWKIhfhqE0g?e=yLN6OU) |   81.78 |
 
 
 Note that the results are slightly different from what we reported in our paper. Because we clean the our generated SimCSE\_NLI dataset and filter out failure generations (e.g. "I am sorry, I can not generate a sentence...").
