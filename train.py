@@ -403,7 +403,7 @@ def main():
         sent1_cname = column_names[0]
     else:
         sent0_cname = column_names[0]
-        sent1_cname = column_names[2]
+        sent1_cname = column_names[1]
         sent2_cname = column_names[3]
     def prepare_features(examples):
         # padding = longest (default)
