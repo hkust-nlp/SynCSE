@@ -1,5 +1,7 @@
 ## Contrastive Learning of Sentence embeddings from scratch
 This repository contains the code, datasets and pre-trained models for our paper [Contrastive Learning of Sentence embeddings from scratch](https://arxiv.org/abs/2305.15077).
+
+
 **************************** **Updates** ****************************
 
 Thanks for your interest in our repo!
@@ -78,7 +80,7 @@ bash download_dataset.sh
 ```
 
 Then come back to the root directory, you can evaluate any `transformers`-based pre-trained models using our evaluation code. For example,
-```bash ./script/
+```bash ./scripts/eval.sh
 ```
 which is expected to output the results in a tabular format:
 ```
@@ -114,7 +116,7 @@ Arguments for the evaluation script are as follows,
 
 **Data**
 
-For unsupervised SimCSE, we sample 1 million sentences from English Wikipedia; for supervised SimCSE, we use the SNLI and MNLI datasets. You can run `data/download_wiki.sh` and `data/download_nli.sh` to download the two datasets.
+For unsupervised SynCSE-partial, we generate postive and hard negative samples for each of the premise sentence in the NLI dataset used in SimCSE. Please download the . and put it into the data file.
 
 **Training scripts**
 
@@ -159,18 +161,10 @@ If you have any questions related to the code or the paper, feel free to email T
 Please cite our paper if you use SimCSE in your work:
 
 ```bibtex
-@inproceedings{gao2021simcse,
-   title={{SimCSE}: Simple Contrastive Learning of Sentence Embeddings},
-   author={Gao, Tianyu and Yao, Xingcheng and Chen, Danqi},
-   booktitle={Empirical Methods in Natural Language Processing (EMNLP)},
-   year={2021}
+@article{zhang2023contrastive,
+  title={Contrastive Learning of Sentence Embeddings from Scratch},
+  author={Zhang, Junlei and Lan, Zhenzhong and He, Junxian},
+  journal={arXiv preprint arXiv:2305.15077},
+  year={2023}
 }
 ```
-
-## SimCSE Elsewhere
-
-We thank the community's efforts for extending SimCSE!
-
-- [Jianlin Su](https://github.com/bojone) has provided [a Chinese version of SimCSE](https://github.com/bojone/SimCSE).
-- [AK391](https://github.com/AK391) integrated to [Huggingface Spaces](https://huggingface.co/spaces) with [Gradio](https://github.com/gradio-app/gradio). See demo: [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/akhaliq/SimCSE)
-- [Nils Reimers](https://github.com/nreimers) has implemented a `sentence-transformers`-based [training code](https://colab.research.google.com/drive/1gAjXcI4uSxDE_IcvZdswFYVAo7XvPeoU?usp=sharing#scrollTo=UXUsikOc6oiB) for SimCSE
