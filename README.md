@@ -23,14 +23,12 @@ Thanks for your interest in our repo!
   - [Overview](#overview)
   - [Getting Started](#getting-started)
   - [Model List](#model-list)
-  - [Use SimCSE with Huggingface](#use-simcse-with-huggingface)
-  - [Train SimCSE](#train-simcse)
+  - [Train SynCSE](#train-SynCSE)
     - [Requirements](#requirements)
     - [Evaluation](#evaluation)
     - [Training](#training)
   - [Bugs or Questions?](#bugs-or-questions)
   - [Citation](#citation)
-  - [SimCSE Elsewhere](#simcse-elsewhere)
 
 ## Overview
 
@@ -54,7 +52,7 @@ Note that the results are slightly different from what we reported in our paper.
 
 ## Train SynCSE
 
-In the following section, we describe how to train a SimCSE model by using our code.
+In the following section, we describe how to train a SynCSE model by using our code.
 
 ### Requirements
 
@@ -98,8 +96,7 @@ Arguments for the evaluation script are as follows,
 
 * `--model_name_or_path`: The name or path of a `transformers`-based pre-trained checkpoint. You can directly use the models in the above table, e.g., `princeton-nlp/sup-simcse-bert-base-uncased`.
 * `--pooler`: Pooling method. Now we support
-    * `cls` (default): Use the representation of `[CLS]` token. A linear+activation layer is applied after the representation (it's in the standard BERT implementation). If you use **supervised SimCSE**, you should use this option.
-    * `cls_before_pooler`: Use the representation of `[CLS]` token without the extra linear+activation. If you use **unsupervised SimCSE**, you should take this option.
+    * `cls` (default): Use the representation of `[CLS]` token.
     * `avg`: Average embeddings of the last layer. If you use checkpoints of SBERT/SRoBERTa ([paper](https://arxiv.org/abs/1908.10084)), you should use this option.
     * `avg_top2`: Average embeddings of the last two layers.
     * `avg_first_last`: Average embeddings of the first and last layers. If you use vanilla BERT or RoBERTa, this works the best.
@@ -126,7 +123,6 @@ We provide example training scripts for both training SynCSE in `sup_train_mp.sh
 * `--model_name_or_path`: Pre-trained checkpoints to start with. For now we support BERT-based models (`bert-base-uncased`, `bert-large-uncased`, etc.) and RoBERTa-based models (`RoBERTa-base`, `RoBERTa-large`, etc.).
 * `--temp`: Temperature for the contrastive loss.
 * `--pooler_type`: Pooling method. It's the same as the `--pooler_type` in the [evaluation part](#evaluation).
-* `--mlp_only_train`: We have found that for unsupervised SimCSE, it works better to train the model with MLP layer but test the model without it. You should use this argument when training unsupervised SimCSE models.
 * `--hard_negative_weight`: If using hard negatives (i.e., there are 3 columns in the training file), this is the logarithm of the weight. For example, if the weight is 1, then this argument should be set as 0 (default value).
 * `--do_mlm`: Whether to use the MLM auxiliary objective. If True:
   * `--mlm_weight`: Weight for the MLM objective.
@@ -138,7 +134,7 @@ For results in the paper, we use Nvidia A100 (80G) GPUs with CUDA 11.6 Using dif
 
 **Hyperparameters**
 
-We use the following hyperparamters for training SimCSE:
+We use the following hyperparamters for training SynCSE:
 
 |               | Unsup. RoBERTa |
 |:--------------|:---------:|
