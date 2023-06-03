@@ -1,4 +1,4 @@
-## Contrastive Learning of Sentence embeddings from scratch
+## Contrastive Learning of Sentence Embeddings from Scratch
 This repository contains the code, datasets and pre-trained models for our paper [Contrastive Learning of Sentence embeddings from scratch](https://arxiv.org/abs/2305.15077).
 
 
