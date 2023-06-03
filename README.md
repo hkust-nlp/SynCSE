@@ -161,13 +161,13 @@ For results in the paper, we use Nvidia A100 (80G) GPUs with CUDA 11.6 Using dif
 **Hyperparameters**
 
 We use the following hyperparamters for training SynCSE:
-
+```
 |:--------------|:---------:|
 | Batch size    |  512       |
 | Learning rate (base)   | 5e-5 |
 | Learning rate (large) | 1e-5 |
 
-
+```
 **Convert models**
 
 Our saved checkpoints are slightly different from Huggingface's pre-trained checkpoints. Run `python simcse_to_huggingface.py --path {PATH_TO_CHECKPOINT_FOLDER}` to convert it.
