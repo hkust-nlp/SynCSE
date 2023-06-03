@@ -40,7 +40,7 @@ Our released models are listed as following.
 | [sjtu-lit/SynCSE-partial-RoBERTa-large](https://huggingface.co/sjtu-lit/SynCSE-partial-RoBERTa-large) |81.84|
 
 
-Our results slightly differ from what we report in the paper, due to varying data cleaning procedures. In the paper, we employ an amount of uncleaned data identical to the NLI dataset used by SimCSE. However, here we omit some unsuccessfully generated data, for example, outputs from ChatGPT might include: "I am sorry, I can not generate a paraphrased sentence of the input, because...". Specifically, for the SynCSE-partial-NLI dataset, we directly remove those sentences that fail to generate, utilizing only the remaining 263k entries for training (the source NLI dataset contains 276k entries). For the SynCSE-scratch-NLI dataset, because it is possible to produce unlabeled data, we randomly sample 276k entries.
+The results slightly differ from what we report in the paper, due to varying data cleaning procedures. In the paper, we employ an amount of uncleaned data identical to the NLI dataset used by SimCSE. However, here we omit some unsuccessfully generated data, for example, outputs from ChatGPT might include: "I am sorry, I can not generate a paraphrased sentence of the input, because...". Specifically, for the SynCSE-partial-NLI dataset, we directly remove those sentences that fail to generate, utilizing only the remaining 263k entries for training (the source NLI dataset contains 276k entries). For the SynCSE-scratch-NLI dataset, because it is possible to produce unlabeled data, we randomly sample 276k entries.
 
 ## Dataset List
 |             Dataset             | 
