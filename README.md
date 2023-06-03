@@ -54,7 +54,7 @@ These two datasets are respectively used for the SynCSE-partial and SynCSE-scrat
 
 ### Requirements
 
-First, install PyTorch by following the instructions from [the official website](https://pytorch.org). To faithfully reproduce our results, please use the correct ` 1.13.0+cu116` version corresponding to your platforms/CUDA versions. We train our model on a single A100-80G card.
+First, install PyTorch by following the instructions from [the official website](https://pytorch.org). To faithfully reproduce our results, please use the correct `1.13.0+cu116` version corresponding to your platforms/CUDA versions. We train our model on a single A100-80G card.
 
 ```bash
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.6 -c pytorch -c nvidia
