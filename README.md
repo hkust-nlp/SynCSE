@@ -6,7 +6,7 @@ This repository contains the code, datasets and pre-trained models for our paper
 
 Thanks for your interest in our repo!
 
-* 2/6: We released our [model checkpoints and dataset](https://huggingface.co/sjtu-lit)
+* 6/2: We released our [model checkpoints and dataset](https://huggingface.co/sjtu-lit)
 * 5/23: We released [our paper](https://arxiv.org/abs/2305.15077). Check it out!
 
 
