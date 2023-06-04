@@ -177,7 +177,7 @@ If you have any questions related to the code or the paper, feel free to email J
 
 ## Citation
 
-Please cite our paper if you use SimCSE in your work:
+Please cite our paper if you use SyNCSE in your work:
 
 ```bibtex
 @article{zhang2023contrastive,
