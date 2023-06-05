@@ -7,7 +7,7 @@ Junlei Zhang, Zhenzhong Lan, Junxian He
 Preprint 2023
 ```
 
-We propose SynCSE, an unsupervised sentence embedding learning approach that trains sentence embeddings from scratch, without any data samples. Specifically, we use ChatGPT to synthesize the positive and hard negative samples (SynCSE-partial) given unlabeled sentences, or synthesize the unlabeled sentences, positive, and hard negative samples altogether (SynCSE-scratch). We release the synthetic SynCSE-partial and SynCSE-scratch datasets along with the model checkpoints.
+We propose SynCSE, an unsupervised sentence embedding learning approach that trains sentence embeddings from scratch, without any (unlabeled) data samples. Specifically, we use ChatGPT to synthesize the positive and hard negative samples (SynCSE-partial) given unlabeled sentences, or synthesize the unlabeled sentences, positive, and hard negative samples altogether (SynCSE-scratch). We release the synthetic SynCSE-partial and SynCSE-scratch datasets along with the model checkpoints.
 
 ## Updates
 
