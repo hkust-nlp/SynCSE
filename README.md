@@ -124,7 +124,6 @@ Our evaluation code for sentence embeddings is based on a modified version of [S
 
 Before evaluation, please download the evaluation datasets by running
 ```bash
-git clone https://github.com/facebookresearch/SentEval
 cd SentEval/data/downstream/
 bash download_dataset.sh
 ```
@@ -162,7 +161,7 @@ Arguments for the evaluation script are as follows,
 * `--tasks`: Specify which dataset(s) to evaluate on. Will be overridden if `--task_set` is not `na`. See the code for a full list of tasks.
 
 ## Acknowledgement
-Our training and evaluation code is based on the [SimCSE repo](https://github.com/princeton-nlp/SimCSE).
+Our training code is based on the [SimCSE repo](https://github.com/princeton-nlp/SimCSE), and the evaluatio code is based on the [SentEval repo](https://github.com/facebookresearch/SentEval)
 
 ## Bugs or questions?
 
