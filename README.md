@@ -91,7 +91,7 @@ pip install -r requirements.txt
 ### Training
 
 #### Data
-Please download the SynCSE-partial-NLI and the SynCSE-scratch-NLI [datasets](#datasets), and put them into the data folder.
+You can specify `sjtu-lit/SynCSE-partial-NLI` or `sjtu-lit/SynCSE-scratch-NLI` in the scripts/sup_train_mp.sh. It will download the dataset automatically. You can also download the SynCSE-partial-NLI and the SynCSE-scratch-NLI [datasets](#datasets), and put them into the data folder.
 
 #### Training scripts
 
