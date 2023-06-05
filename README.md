@@ -17,7 +17,7 @@ We propose SynCSE, an unsupervised sentence embedding learning approach that tra
 
 ## Quick Links
 
-  - [Model Checkpoints](#model-list)
+  - [Model Checkpoints](#model-checkpoints)
   - [Datasets](#datasets)
   - [Train SynCSE](#train-SynCSE)
     - [Requirements](#requirements)
