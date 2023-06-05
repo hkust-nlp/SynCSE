@@ -21,9 +21,9 @@ We propose SynCSE, an unsupervised sentence embedding learning approach that tra
   - [Datasets](#datasets)
   - [Train SynCSE](#train-SynCSE)
     - [Requirements](#requirements)
-    - [Evaluation](#evaluation)
     - [Training](#training)
-  - [Bugs or Questions?](#bugs-or-questions)
+    - [Evaluation](#evaluation)
+  - [Acknowledgement](#acknowledgement)
   - [Citation](#citation)
 
 ## Model Checkpoints
@@ -87,10 +87,6 @@ Then run the following script to install the remaining dependencies,
 ```bash
 pip install -r requirements.txt
 ```
-
-## Train SynCSE
-
-In the following section, we describe how to train a SynCSE model by using our code.
 
 ### Training
 
