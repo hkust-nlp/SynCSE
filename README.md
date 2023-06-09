@@ -73,7 +73,7 @@ These two synthetic datasets are respectively used for the SynCSE-partial and Sy
 
 To download the data, take SynCSE-partial for an example:
 ```
-wget https://huggingface.co/datasets/sjtu-lit/SynCSE-partial-NLI/blob/main/train.csv
+wget https://huggingface.co/datasets/sjtu-lit/SynCSE-partial-NLI/resolve/resolve/train.csv
 ```
 
 ## Train SynCSE
